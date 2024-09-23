@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	_ "github.com/Taluu/json-encoder-exercise/pkg/encoder/base64"
 )
 
 func main() {
