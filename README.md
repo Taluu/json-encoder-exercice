@@ -18,3 +18,25 @@ bin/json-encrypter-exercise
 
 ### Fron binary release
 No releases yet :P
+
+Endpoints
+---------
+### Encrypting data
+You can encrypt data by hitting the endpoint (with default values for host and
+ports, `localhost` and `8080`) on a POST request, with a valid json object :
+
+```bash
+curl http://localhost:8080/encrypt -X POST -d "{\"foo\": \"bar\", \"number\": 1, \"object\": {\"one\": \"two\", \"three\": 3}}"
+```
+
+You should get a 200 response with the following values :
+
+```json
+{
+    "foo": "YmFy",
+    "number":"MQ==",
+    "object":"eyJvbmUiOiJ0d28iLCJ0aHJlZSI6M30="
+}
+```
+
+On errors, you can have a 405 on a method other than POST, or 400 if the json body cannot be decoded into an object.

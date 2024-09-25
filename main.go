@@ -6,7 +6,9 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/Taluu/json-encoder-exercise/pkg/di"
 	_ "github.com/Taluu/json-encoder-exercise/pkg/encoder/base64"
+	_ "github.com/Taluu/json-encoder-exercise/pkg/http"
 )
 
 func main() {
@@ -17,6 +19,8 @@ func main() {
 
 	addr := fmt.Sprintf("%s:%d", *host, *port)
 
-	fmt.Printf("Starting to listen on %s...", addr)
+	di.RegisterHTTP("/encrypt")
+
+	log.Printf("Starting to listen on %s...\n", addr)
 	log.Fatal(http.ListenAndServe(addr, nil))
 }
