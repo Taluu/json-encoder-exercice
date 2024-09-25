@@ -21,9 +21,13 @@ No releases yet :P
 
 Endpoints
 ---------
+Note : all example are hitting as if the domain is `localhost` and the port
+`8080`. These can be configured when executing the binary with the flags 
+`-domain` and `port` : `bin/json-encoder-exercise -domain localhost -port 8080`
+
 ### Encrypting data
-You can encrypt data by hitting the endpoint (with default values for host and
-ports, `localhost` and `8080`) on a POST request, with a valid json object :
+You can encrypt data by hitting the endpoint `/encrypt` on a POST request, with
+a valid json object :
 
 ```bash
 curl http://localhost:8080/encrypt -X POST -d "{\"foo\": \"bar\", \"number\": 1, \"object\": {\"one\": \"two\", \"three\": 3}}"
@@ -39,4 +43,33 @@ You should get a 200 response with the following values :
 }
 ```
 
-On errors, you can have a 405 on a method other than POST, or 400 if the json body cannot be decoded into an object.
+On errors, you can have a 405 on a method other than POST, or 400 if the json
+body cannot be decoded into an object.
+
+### Decrypting data
+You can decrypt data, and the server will try to decode also nested values (such
+as in an object or an array) by hitting the endpoint `/decrypt` on a POST request,
+with a valid json object :
+
+```bash
+curl http://localhost:8080/decrypt -X POST -d "{\"foo\": \"YmFy\", \"number\": 1, \"object\": \"eyJvbmUiOiJ0d28iLCJ0aHJlZSI6M30=\"}"
+```
+
+You should then get a 200 response with the following values :
+
+```json
+{
+    "foo": "bar",
+    "number": 1,
+    "object": {
+        "one": "two",
+        "three": 3
+    }
+}
+```
+
+If an encoded value was a json object or array, it will be returned as such, but
+if there was an encrypted value in them, they won't be decrypted.
+
+On errors, you can have a 405 on a method other than POST, or 400 on bad json
+input.

@@ -20,6 +20,7 @@ func main() {
 	addr := fmt.Sprintf("%s:%d", *host, *port)
 
 	di.RegisterHTTP("/encrypt")
+	di.RegisterHTTP("/decrypt")
 
 	log.Printf("Starting to listen on %s...\n", addr)
 	log.Fatal(http.ListenAndServe(addr, nil))
