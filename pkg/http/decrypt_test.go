@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"github.com/Taluu/json-encoder-exercise/pkg/di"
-	_ "github.com/Taluu/json-encoder-exercise/pkg/encoder/base64"
+	_ "github.com/Taluu/json-encoder-exercise/pkg/test"
 )
 
 func TestDecrypt(t *testing.T) {

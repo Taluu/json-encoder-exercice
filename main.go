@@ -38,6 +38,8 @@ func main() {
 	di.RegisterHTTP("/encrypt")
 	di.RegisterHTTP("/decrypt")
 
+	di.RegisterHTTP("/sign")
+
 	log.Printf("Starting to listen on %s...\n", addr)
 	log.Fatal(http.ListenAndServe(addr, nil))
 }
