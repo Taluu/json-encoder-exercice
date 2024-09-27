@@ -109,3 +109,27 @@ The `data` property of the returned objet will be of the type of the given data
 
 On errors, you can have a 405 for a method other than POST, or 400 on bad json
 input (or empty input).
+
+## Verifying data
+As data can be signed with the `/sign` endpoint, signed data can also be
+verified against a signature with the `/verify` endpoint on a POST request,
+like the following :
+
+```bash
+curl http://localhost:8080/verify -X POST -d "{\"signature\":\"51fb0f2895400032daf856082634c635f5fe21a2848b4b2337ebeb3fc0e9c05c\",\"data\":{\"foo\":\"bar\"}}"
+```
+
+The expected body should be as the response of the sign body :
+
+```json
+{
+    "data": { ... },
+    "signature": "..."
+}
+```
+
+The data can be anything as long as it's a json valid body.
+
+If the signature is valid, an empty response with a 204 http code will be
+returned, other a 400 will be returned if it's invalid. A 405 will be returned
+if it's not a POST request.
