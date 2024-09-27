@@ -22,7 +22,7 @@ signatures for the `/sign` and `/verify` endpoints.
 Other available flags are `-domain` and `-port`, with respective default values
 being `localhost` and `8080`.
 
-### Fron binary release
+### From binary release
 Binaries should be released on the Releases page on the github repo.
 
 Endpoints
